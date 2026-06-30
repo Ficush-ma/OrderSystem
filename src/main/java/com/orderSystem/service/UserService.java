@@ -36,8 +36,10 @@ public class UserService {
     }
 
     public String userLogin(UserDTO userDTO){
-        if (redisTemplate.opsForValue().get(userDTO.getUserName()) !=null){
-            return redisTemplate.opsForValue().get(userDTO.getUserName());
+        String redisToken = redisTemplate.opsForValue().get(userDTO.getUserName());
+        if (redisToken !=null){
+            redisTemplate.opsForValue().set(userDTO.getUserName(), redisToken,10, TimeUnit.HOURS);
+            return redisToken;
         }
         if (userDTO.getPassword().equals(userMapper.getUserPassword(userDTO.getUserName()))){
             BaseContext.setCurrentUser(userMapper.getUserId(userDTO.getUserName()));
