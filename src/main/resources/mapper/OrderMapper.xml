@@ -1,0 +1,9 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orderSystem.mapper.OrderMapper">
+    <insert id="createOrder" parameterType="com.orderSystem.DTO.OrderDTO" >
+        INSERT INTO orderRecord (user_id, product_id, quantity, amount, status, created_at)
+        VALUES (#{userId}, #{orderDTO.productId}, #{orderDTO.quantity}, #{orderDTO.amount}, 0, NOW())
+    </insert>
+</mapper>

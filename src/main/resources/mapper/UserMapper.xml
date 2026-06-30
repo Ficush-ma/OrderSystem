@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orderSystem.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.orderSystem.entity.User">
+        INSERT INTO user (user_name,password,balance,created_at) VALUES
+        (#{userName}, #{password}, #{balance}, #{createdAt});
+    </insert>
+    <select id="getUserPassword" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT password FROM user
+        <where>
+            user_name = #{userName}
+        </where>
+    </select>
+    <select id="getUserId" resultType="int" parameterType="java.lang.String">
+        SELECT id FROM user
+        <where>
+            user_name = #{userName}
+        </where>
+    </select>
+    <select id="getUserById" parameterType="int" resultType="com.orderSystem.entity.User">
+        SELECT * FROM user
+        <where>
+            id = #{id}
+        </where>
+    </select>
+    <update id="setBalance">
+        UPDATE user
+        SET balance = #{num}
+        <where>
+            id = #{userId}
+        </where>
+    </update>
+</mapper>

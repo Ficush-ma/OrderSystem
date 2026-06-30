@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orderSystem.mapper.ProductMapper">
+    <select id="getAllProductName" resultType="java.lang.String">
+        SELECT name FROM product
+    </select>
+    <select id="searchProduct" resultType="com.orderSystem.entity.Product" parameterType="int">
+        SELECT * FROM product
+        <where>
+            id = #{id}
+        </where>
+    </select>
+    <update id="setStock">
+        UPDATE product
+        SET stock = #{num}
+        <where>
+            id = #{productId}
+        </where>
+    </update>
+</mapper>
